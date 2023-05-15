@@ -3,6 +3,7 @@ import React from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import Countdown from "react-countdown";
+import { Link } from "react-router-dom";
 
 const responsive = {
   superLargeDesktop: {
@@ -106,16 +107,21 @@ function Slide({ products, title, timer }) {
         itemClass="carousel-item-padding-40-px"
       >
         {products?.map((product) => (
-          <Box textAlign={"center"} style={{ padding: "25px 15px" }}>
-            <ProductImage src={product.url} alt="product" />
-            <Text style={{ fontWeight: "600", color: "#212121" }}>
-              {product?.title?.shortTitle}
-            </Text>
-            <Text style={{ color: "green" }}>{product?.discount}</Text>
-            <Text style={{ opacity: "0.6", color: "#212121" }}>
-              {product?.tagline}
-            </Text>
-          </Box>
+          <Link
+            to={`product/${product?.id}`}
+            style={{ textDecoration: "none" }}
+          >
+            <Box textAlign={"center"} style={{ padding: "25px 15px" }}>
+              <ProductImage src={product.url} alt="product" />
+              <Text style={{ fontWeight: "600", color: "#212121" }}>
+                {product?.title?.shortTitle}
+              </Text>
+              <Text style={{ color: "green" }}>{product?.discount}</Text>
+              <Text style={{ opacity: "0.6", color: "#212121" }}>
+                {product?.tagline}
+              </Text>
+            </Box>
+          </Link>
         ))}
       </Carousel>
     </Container>

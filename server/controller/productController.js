@@ -10,12 +10,13 @@ export const getProducts = async (request, response) => {
   }
 };
 
-// export const getProducts = async (request, response) => {
-//   try {
-//     const products = await Product.find({});
+export const getProductById = async (request, response) => {
+  try {
+    const pid = request.params.pid;
 
-//     response.json(products);
-//   } catch (error) {
-//     return response.status(500).json(error.message);
-//   }
-// };
+    const product = await Product.findOne({ id: pid });
+    return response.status(200).json(product);
+  } catch (error) {
+    return response.status(500).json(error.message);
+  }
+};

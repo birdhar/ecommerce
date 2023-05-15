@@ -8,22 +8,38 @@ import Profile from "../Profile";
 function HeaderButton() {
   const [open, setOpen] = useState(false);
   const { acccount, setAcccount } = useContext(DataContext);
-  const Wrapper = styled(Box)`
-    display: flex;
-    align-items: center;
 
-    margin: 0 3% 0 auto;
-    & > button,
-    & > p,
-    & > div {
-      margin-right: 40px;
-      font-size: 14px;
-    }
-  `;
+  const Wrapper = styled(Box)(({ theme }) => ({
+    display: "flex",
+    alignItems: "center",
+    margin: "0 3% 0 auto",
+    " & > * ": {
+      marginRight: "40px",
+      fontSize: "14px",
+    },
+    [theme.breakpoints.down("md")]: {
+      display: "block",
+    },
+  }));
+  // const Wrapper = styled(Box)`
+  //   display: flex;
+  //   align-items: center;
 
-  const Container = styled(Box)`
-    display: flex;
-  `;
+  //   margin: 0 3% 0 auto;
+  //   & > button,
+  //   & > p,
+  //   & > div {
+  //     margin-right: 40px;
+  //     font-size: 14px;
+  //   }
+  // `;
+
+  const Container = styled(Box)(({ theme }) => ({
+    display: "flex",
+    [theme.breakpoints.down("md")]: {
+      display: "block",
+    },
+  }));
 
   const LoginButton = styled(Button)`
     color: #2874f0;
