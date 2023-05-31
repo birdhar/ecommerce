@@ -1,6 +1,11 @@
 import { Box, Button, styled } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import { ShoppingCart as Cart, FlashOn as Flash } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../redux/actions/cartAction";
+import { payUsingPaytm } from "../../services/flipkartApi";
+import { post } from "../../utils/paytm";
 
 const LeftContainer = styled(Box)(({ theme }) => ({
   minWidth: "40%",
@@ -29,6 +34,28 @@ const StyledButton = styled(Button)(({ theme }) => ({
 }));
 
 function ActionItem({ product }) {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [quantity, setQuantity] = useState(1);
+
+  const addItemToCart = () => {
+    dispatch(addToCart(product.id, quantity));
+    navigate("/cart");
+  };
+
+  const paymentHandler = async () => {
+    let response = await payUsingPaytm({
+      amount: 500,
+      email: "birat.dhar.89@gmail.com",
+    });
+    let information = {
+      action: "https://securegw-stage.paytm.in/order/process",
+      params: response,
+    };
+
+    post(information);
+  };
+
   return (
     <LeftContainer>
       <Box style={{ padding: "15px 20px", border: "1px solid #f0f0f0" }}>
@@ -37,6 +64,7 @@ function ActionItem({ product }) {
       <StyledButton
         variant="contained"
         style={{ marginRight: 10, background: "#ff9f00", marginTop: 10 }}
+        onClick={() => addItemToCart()}
       >
         <Cart />
         Add To Cart
@@ -44,6 +72,7 @@ function ActionItem({ product }) {
       <StyledButton
         variant="contained"
         style={{ background: "#fb641b", marginTop: 10 }}
+        onClick={() => paymentHandler()}
       >
         <Flash />
         Buy Now

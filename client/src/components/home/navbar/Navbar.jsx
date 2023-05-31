@@ -23,14 +23,16 @@ function Navbar() {
     font-weight: 600;
   `;
   return (
-    <Component>
-      {navData.map((data) => (
-        <Container>
-          <img src={data.url} alt="nav-item" style={{ width: 64 }} />
-          <Text>{data.text}</Text>
-        </Container>
-      ))}
-    </Component>
+    <Box style={{ backgroundColor: "#fff" }}>
+      <Component>
+        {navData.map((data) => (
+          <Container>
+            <img src={data.url} alt="nav-item" style={{ width: 64 }} />
+            <Text>{data.text}</Text>
+          </Container>
+        ))}
+      </Component>
+    </Box>
   );
 }
 

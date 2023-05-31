@@ -6,6 +6,7 @@ import Home from "./components/home/Home";
 import DataProvider from "./context/DataProvider";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import DetailView from "./components/details/DetailView";
+import Cart from "./components/cart/Cart";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -19,6 +20,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/product/:pid" element={<DetailView />} />
+            <Route path="/cart" element={<Cart />} />
           </Routes>
         </Box>
       </BrowserRouter>
